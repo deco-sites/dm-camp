@@ -16,6 +16,7 @@ export interface Props {
    * @minItems 3
    */
   images?: Image[];
+  btnText?: string;
   line?: number;
 }
 
@@ -47,22 +48,22 @@ export default function PartialImageGallery(props: Props) {
     <section class="container px-4 py-8 flex flex-col gap-8 lg:gap-10 lg:py-10 lg:px-0">
       <Header title={title} description={description} alignment="center" />
       <ul
-        class={`grid grid-flow-col grid-cols-3 grid-rows-${total} gap-4 list-none`}
+        class={`grid grid-cols-3 grid-rows-${total} gap-4 list-none`}
       >
         {images?.slice(0, line * 3)?.map((image) => (
-          <li class="">
+          <li>
             <ImageItem {...image} />
           </li>
         ))}
       </ul>
-      {line < total && (
+      {(btnText && line < total) && (
         <button
           class="btn btn-secondary cursor-pointer"
           {...usePartialSection<typeof PartialImageGallery>({
             props: { line: line + 1 },
           })}
         >
-          Ver mais culturas
+          {btnText}
         </button>
       )}
     </section>
