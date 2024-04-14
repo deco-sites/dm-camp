@@ -41,7 +41,7 @@ function ImageItem(props: Image) {
 }
 
 export default function PartialImageGallery(props: Props) {
-  const { title, description, images, line = 1 } = props;
+  const { title, description, images, btnText, line = 1 } = props;
   const total = images?.length ? images?.length / line : 3;
 
   return (
