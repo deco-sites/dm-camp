@@ -19,7 +19,7 @@ function HorizontalProductCard({ product }: Props) {
 
   return (
     <div class="flex justify-center p-8">
-      <div class="card w-full shadow-xl bg-accent">
+      <div class="card w-full bg-base-100 shadow-xl">
         <div class="card-body">
           <div class="flex">
             <a

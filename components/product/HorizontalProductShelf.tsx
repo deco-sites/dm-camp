@@ -5,15 +5,27 @@ import Slider from "../../components/ui/Slider.tsx";
 import SliderJS from "../../islands/SliderJS.tsx";
 import { useId } from "../../sdk/useId.ts";
 import type { Product } from "apps/commerce/types.ts";
-import { clx } from "../../sdk/clx.ts";
+
+type Size =
+  | "max-w-xl"
+  | "max-w-2xl"
+  | "max-w-3xl"
+  | "max-w-4xl"
+  | "max-w-5xl"
+  | "max-w-6xl"
+  | "max-w-7xl"
+  | "max-w-full";
 
 export interface Props {
   products: Product[] | null;
   title?: string;
   description?: string;
+  maxSize?: Size;
 }
 
-function ProductShelf({ products, title, description }: Props) {
+function HorizontalProductShelf(props: Props) {
+  const { products, title, description, maxSize = "max-w-full" } = props;
+
   const id = useId();
 
   if (!products || products.length === 0) {
@@ -21,7 +33,9 @@ function ProductShelf({ products, title, description }: Props) {
   }
 
   return (
-    <div class="w-full container py-8 flex flex-col gap-6 lg:py-10">
+    <div
+      class={`w-full ${maxSize} container py-8 flex flex-col gap-6 lg:py-10`}
+    >
       <Header
         title={title || ""}
         description={description || ""}
@@ -60,4 +74,4 @@ function ProductShelf({ products, title, description }: Props) {
   );
 }
 
-export default ProductShelf;
+export default HorizontalProductShelf;

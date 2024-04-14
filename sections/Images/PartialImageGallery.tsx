@@ -47,24 +47,24 @@ export default function PartialImageGallery(props: Props) {
   return (
     <section class="container px-4 py-8 flex flex-col gap-8 lg:gap-10 lg:py-10 lg:px-0">
       <Header title={title} description={description} alignment="center" />
-      <ul
-        class={`grid grid-cols-3 grid-rows-${total} gap-4 list-none`}
-      >
+      <ul class={`grid grid-cols-3 grid-rows-${total} gap-4 list-none`}>
         {images?.slice(0, line * 3)?.map((image) => (
           <li>
             <ImageItem {...image} />
           </li>
         ))}
       </ul>
-      {(btnText && line < total) && (
-        <button
-          class="btn btn-secondary cursor-pointer"
-          {...usePartialSection<typeof PartialImageGallery>({
-            props: { line: line + 1 },
-          })}
-        >
-          {btnText}
-        </button>
+      {btnText && line < total && (
+        <div class="flex justify-center col-span-full">
+          <button
+            class="btn btn-secondary cursor-pointer"
+            {...usePartialSection<typeof PartialImageGallery>({
+              props: { line: line + 1 },
+            })}
+          >
+            {btnText}
+          </button>
+        </div>
       )}
     </section>
   );
