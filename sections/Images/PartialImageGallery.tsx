@@ -46,7 +46,12 @@ export default function PartialImageGallery(props: Props) {
 
   return (
     <section class="container px-4 py-8 flex flex-col gap-8 lg:gap-10 lg:py-10 lg:px-0">
-      <Header title={title} description={description} alignment="center" />
+      <Header
+        title={title}
+        description={description}
+        alignment="center"
+        fontSize="Normal"
+      />
       <ul class={`grid grid-cols-3 grid-rows-${total} gap-4 list-none`}>
         {images?.slice(0, line * 3)?.map((image) => (
           <li>
