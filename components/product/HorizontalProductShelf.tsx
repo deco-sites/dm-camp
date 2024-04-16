@@ -21,10 +21,17 @@ export interface Props {
   title?: string;
   description?: string;
   maxSize?: Size;
+  animateImage?: boolean;
 }
 
 function HorizontalProductShelf(props: Props) {
-  const { products, title, description, maxSize = "max-w-full" } = props;
+  const {
+    products,
+    title,
+    description,
+    maxSize = "max-w-full",
+    animateImage,
+  } = props;
 
   const id = useId();
 
@@ -39,29 +46,32 @@ function HorizontalProductShelf(props: Props) {
       <Header
         title={title || ""}
         description={description || ""}
-        fontSize="Large"
+        fontSize="Normal"
         alignment="center"
       />
 
       <div
         id={id}
-        class="grid grid-cols-[48px_1fr_48px] px-0 md:px-5 container"
+        class="grid grid-cols-1 lg:grid-cols-[48px_1fr_48px] px-0 md:px-5 container"
       >
         <Slider class="carousel carousel-center sm:carousel-end sm:gap-1 row-start-2 row-end-5">
           {products?.map((product, index) => (
             <Slider.Item index={index} class="carousel-item w-full">
-              <HorizontalProductCard product={product} />
+              <HorizontalProductCard
+                product={product}
+                animateImage={animateImage}
+              />
             </Slider.Item>
           ))}
         </Slider>
 
         <>
-          <div class="relative block z-10 col-start-1 row-start-3">
+          <div class="relative hidden md:block z-10 col-start-1 row-start-3">
             <Slider.PrevButton class="absolute w-12 h-12 flex justify-center items-center">
               <Icon size={24} id="ChevronLeft" strokeWidth={3} class="w-5" />
             </Slider.PrevButton>
           </div>
-          <div class="relative block z-10 col-start-3 row-start-3">
+          <div class="relative hidden md:block z-10 col-start-3 row-start-3">
             <Slider.NextButton class="absolute w-12 h-12 flex justify-center items-center">
               <Icon size={24} id="ChevronRight" strokeWidth={3} />
             </Slider.NextButton>
