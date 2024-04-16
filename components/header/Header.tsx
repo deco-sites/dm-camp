@@ -8,6 +8,7 @@ import type { SectionProps } from "deco/types.ts";
 import Alert from "./Alert.tsx";
 import Navbar from "./Navbar.tsx";
 import { headerHeight } from "./constants.ts";
+import ToasterContainer from "../../islands/Header/Toaster.tsx";
 
 export interface Logo {
   src: ImageWidget;
@@ -84,11 +85,7 @@ function Header({
   return (
     <>
       <header style={{ height: headerHeight }}>
-        <Drawers
-          menu={{ items }}
-          searchbar={searchbar}
-          platform={platform}
-        >
+        <Drawers menu={{ items }} searchbar={searchbar} platform={platform}>
           <div class="bg-base-100 fixed w-full z-50">
             {alerts && alerts.length > 0 && <Alert alerts={alerts} />}
             <Navbar
@@ -102,6 +99,8 @@ function Header({
           </div>
         </Drawers>
       </header>
+
+      <ToasterContainer />
     </>
   );
 }
