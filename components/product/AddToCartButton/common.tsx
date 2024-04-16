@@ -2,7 +2,7 @@ import { AddToCartParams } from "apps/commerce/types.ts";
 import { useState } from "preact/hooks";
 import Button from "../../../components/ui/Button.tsx";
 import { sendEvent } from "../../../sdk/analytics.tsx";
-import { useUI } from "../../../sdk/useUI.ts";
+import { toast } from "react-toastify";
 
 export interface Props {
   /** @description: sku name */
@@ -12,7 +12,6 @@ export interface Props {
 
 const useAddToCart = ({ eventParams, onAddItem }: Props) => {
   const [loading, setLoading] = useState(false);
-  const { displayCart } = useUI();
 
   const onClick = async (e: MouseEvent) => {
     e.preventDefault();
@@ -28,7 +27,16 @@ const useAddToCart = ({ eventParams, onAddItem }: Props) => {
         params: eventParams,
       });
 
-      displayCart.value = true;
+      toast.success("Adicionado com sucesso! 🧺", {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     } finally {
       setLoading(false);
     }
@@ -42,7 +50,7 @@ export default function AddToCartButton(props: Props) {
 
   return (
     <Button {...btnProps} class="btn-primary">
-      Adicionar à Sacola
+      Adicionar ao Carrinho
     </Button>
   );
 }
