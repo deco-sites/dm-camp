@@ -21,6 +21,7 @@ interface Props {
   onAddCoupon?: CouponProps["onAddCoupon"];
   onUpdateQuantity: ItemProps["onUpdateQuantity"];
   itemToAnalyticsItem: ItemProps["itemToAnalyticsItem"];
+  fullWidth?: boolean;
 }
 
 function Cart({
@@ -37,14 +38,17 @@ function Cart({
   itemToAnalyticsItem,
   onUpdateQuantity,
   onAddCoupon,
+  fullWidth,
 }: Props) {
   const { displayCart } = useUI();
   const isEmtpy = items.length === 0;
 
   return (
     <div
-      class="flex flex-col justify-center items-center overflow-hidden"
-      style={{ minWidth: "calc(min(100vw, 425px))", maxWidth: "425px" }}
+      class={`flex flex-col justify-center items-center overflow-hidden ${
+        fullWidth ? "w-full container" : "max-w-[425px]"
+      } `}
+      style={{ minWidth: "calc(min(100vw, 425px))" }}
     >
       {isEmtpy
         ? (

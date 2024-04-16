@@ -1,7 +1,11 @@
 import { itemToAnalyticsItem, useCart } from "apps/vtex/hooks/useCart.ts";
 import BaseCart from "../common/Cart.tsx";
 
-function Cart() {
+interface Props {
+  fullWidth?: boolean;
+}
+
+function Cart({ fullWidth }: Props) {
   const { cart, loading, updateItems, addCouponsToCart } = useCart();
   const { items, totalizers } = cart.value ?? { items: [] };
   const total = totalizers?.find((item) => item.id === "Items")?.value || 0;
@@ -39,6 +43,7 @@ function Cart() {
         return item && itemToAnalyticsItem({ ...item, coupon }, index);
       }}
       checkoutHref="/checkout"
+      fullWidth={true}
     />
   );
 }
